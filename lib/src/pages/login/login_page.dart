@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter0/src/pages/routes.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -32,12 +33,14 @@ class _LoginPageState extends State<LoginPage> {
           child: Card(
             child: Container(
               padding: const EdgeInsets.all(32.0),
-              height: 350,
+              height: 420,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   ..._buildTextFields(),
-                  SizedBox(height: 32,),
+                  SizedBox(
+                    height: 32,
+                  ),
                   ..._buildButtons(),
                 ],
               ),
@@ -49,7 +52,9 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _handleClickLogin() {
-    print(":: Dev Login: with ${_usernameController.text}, ${_passwordController.text}");
+    // print(
+    //     ":: Dev Login: with ${_usernameController.text}, ${_passwordController.text}");
+    Navigator.pushNamed(context, AppRoute.home);
   }
 
   void _handleClickReset() {
@@ -57,29 +62,28 @@ class _LoginPageState extends State<LoginPage> {
     _passwordController.text = "";
   }
 
-  _buildTextFields(){
+  void _handleClickRegister() {
+    Navigator.pushNamed(context, AppRoute.register);
+  }
+
+  _buildTextFields() {
     return [
       TextField(
         controller: _usernameController,
         decoration: InputDecoration(labelText: "Username"),
       ),
       TextField(
-      controller: _passwordController,
-      decoration: InputDecoration(labelText: "Password"),
+        controller: _passwordController,
+        decoration: InputDecoration(labelText: "Password"),
       ),
     ];
   }
 
   _buildButtons() {
     return [
-      ElevatedButton(
-          onPressed: _handleClickLogin,
-          child: Text("Login")
-      ),
-      OutlinedButton(
-          onPressed: _handleClickReset,
-          child: Text("Reset")
-      ),
+      ElevatedButton(onPressed: _handleClickLogin, child: Text("Sign In")),
+      OutlinedButton(onPressed: _handleClickRegister, child: Text("Register")),
+      OutlinedButton(onPressed: _handleClickReset, child: Text("Reset")),
     ];
   }
 }
