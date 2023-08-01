@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter0/src/pages/bloc/login/login_bloc.dart';
 import 'package:flutter0/src/pages/routes.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -11,6 +13,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
+  int counter = 0;
 
   @override
   void initState() {
@@ -33,7 +36,7 @@ class _LoginPageState extends State<LoginPage> {
           child: Card(
             child: Container(
               padding: const EdgeInsets.all(32.0),
-              height: 420,
+              height: 500,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -42,6 +45,17 @@ class _LoginPageState extends State<LoginPage> {
                     height: 32,
                   ),
                   ..._buildButtons(),
+                  Row(
+                    children: [
+                      Text("Debug: ${context.read<LoginBloc>().state.count}"),
+                      // sepation of concern
+                      IconButton(
+                          onPressed: _handleClickAdd, icon: Icon(Icons.add)),
+                      IconButton(
+                          onPressed: _handleClickRemove,
+                          icon: Icon(Icons.remove)),
+                    ],
+                  )
                 ],
               ),
             ),
@@ -85,5 +99,17 @@ class _LoginPageState extends State<LoginPage> {
       OutlinedButton(onPressed: _handleClickRegister, child: Text("Register")),
       OutlinedButton(onPressed: _handleClickReset, child: Text("Reset")),
     ];
+  }
+
+  void _handleClickAdd() {
+    setState(() {
+      counter++;
+    });
+  }
+
+  void _handleClickRemove() {
+    setState(() {
+      counter--;
+    });
   }
 }
