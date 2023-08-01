@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter0/src/pages/bloc/login/login_bloc.dart';
+import 'package:flutter0/src/bloc/login/login_bloc.dart';
 import 'package:flutter0/src/pages/login/login_page.dart';
 import 'package:flutter0/src/pages/routes.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
